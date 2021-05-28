@@ -1,6 +1,7 @@
 import sys
+import copy
 
-sys.stdin = open("in1.txt", "rt")
+# sys.stdin = open("in2.txt", "rt")
 
 required_subject = list(input())
 n = int(input())
@@ -11,16 +12,11 @@ for _ in range(n):
 
 
 def check_class_plan(class_list):
-    print("check ", class_list)
-
-    tmp = required_subject
-    print('require ',tmp)
+    tmp = copy.deepcopy(required_subject)
     while len(tmp) > 0:
-        print(tmp)
-        print(class_list)
-        first = class_list[0]
         # print(first, class_list[0])
         if len(class_list) > 0:
+            first = class_list[0]
             if tmp[0] == first:
                 tmp.pop(0)
                 class_list.pop(0)
@@ -37,7 +33,6 @@ for i in range(n):
     else:
         print('#', i + 1, ' NO')
 
-print(check_class_plan())
 
 # print(required_subject)
 # print(class_plan)
