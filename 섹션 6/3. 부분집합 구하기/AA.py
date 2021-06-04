@@ -1,20 +1,23 @@
 import sys
-#sys.stdin=open("input.txt", "r")
-def DFS(v):
-    if v==n+1:
-        for i in range(1, n+1):
-            if ch[i]==1:
-                print(i, end=' ')
+
+# sys.stdin = open("in1.txt", "r")
+
+
+def state_dfs(v):
+    if v == n + 1:
+        for i in range(1, len(arr)):
+            if arr[i] > 0:
+                print(i, end=" ")
         print()
+        return
     else:
-        ch[v]=1
-        DFS(v+1)
-        ch[v]=0
-        DFS(v+1)
+        arr[v] = 1
+        state_dfs(v + 1)
+        arr[v] = 0
+        state_dfs(v + 1)
 
-if __name__=="__main__":
-    n=int(input())
-    ch=[0]*(n+1)
-    DFS(1)
-    
 
+if __name__ == "__main__":
+    n = int(input())
+    arr = [0] * (n + 1)
+    state_dfs(1)
