@@ -4,26 +4,27 @@ import sys
 
 
 def dfs(v):
-    global res, arr, cnt
-    if v > m:
-        for i in range(1,v):
-            print(res[i], end=" ")
+    global res, cnt, ch
+    if v==m:
+        for r in res:
+            print(r, end=' ')
         print()
-        cnt += 1
+        cnt = cnt+1
         return
     else:
         for i in range(1, n+1):
-            if arr[i] == 0:
-                arr[i] = 1
+            if ch[i]==0:
                 res[v]=i
+                ch[i]=1
                 dfs(v+1)
-                arr[i] = 0
+                ch[i]=0
+        return
 
 
 if __name__ == "__main__":
-    n, m = map(int, input().split())
+    n,m = map(int, input().split())
+    res = [0]*m
+    ch = [0]*(n+1)
     cnt = 0
-    arr = [0]*(n+1)
-    res = [0]*n
-    dfs(1)
+    dfs(0)
     print(cnt)

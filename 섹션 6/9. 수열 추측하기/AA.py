@@ -1,27 +1,39 @@
 import sys
 
-sys.stdin = open("input.txt", "rt")
+# sys.stdin = open("in1.txt", "rt")
 
 
-def DFS(L, sum):
-    if L == n and sum == f:
-        for x in p:
-            print(x, end=' ')
-        sys.exit(0)
+def dfs(v):
+    global n, f,ch
+    if v==n:
+        if calc_triangle(res)==f:
+            for r in res:
+                print(r, end=' ')
+            exit()
     else:
-        for i in range(1, n + 1):
-            if ch[i] == 0:
-                ch[i] = 1
-                p[L] = i
-                DFS(L + 1, sum + (p[L] * b[L]))
-                ch[i] = 0
+        for i in range(1, n+1):
+            if ch[i]==0:
+                res[v] = i
+                ch[i]=1
+                dfs(v+1)
+                ch[i]=0
+        return
+
+
+def calc_triangle(arr):
+    b = [1]*n
+    total = 0
+
+    for i in range(1, n):
+        b[i] = (b[i-1]*(n-i))//i
+
+    for j in range(n):
+        total += arr[j]*b[j]
+    return total
 
 
 if __name__ == "__main__":
     n, f = map(int, input().split())
-    p = [0] * n
-    b = [1] * n
-    ch = [0] * (n + 1)
-    for i in range(1, n):
-        b[i] = b[i - 1] * (n - i) // i
-    DFS(0, 0)
+    res = [0]*n
+    ch = [0]*(n+1)
+    dfs(0)
